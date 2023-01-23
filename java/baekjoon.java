@@ -22,20 +22,40 @@ import java.util.*;
 // }
 
 //백준 5597
+// public class baekjoon{
+//     public static Scanner sc=new Scanner(System.in);
+//     public static void main(String[] args){
+//         int[] a=new int[31];
+//         int[] s=new int[31];
+//         for(int i=1;i<=30;i++){
+//             a[i]=i;
+//         }
+//         for(int i=0;i<28;i++){
+//             s[i]=sc.nextInt();
+//             a[s[i]]=0;
+//         }
+//         for(int i=1;i<=30;i++){
+//             if(a[i]!=0) System.out.println(i);
+//         }
+//     }
+// }
+
 public class baekjoon{
     public static Scanner sc=new Scanner(System.in);
     public static void main(String[] args){
-        int[] a=new int[31];
-        int[] s=new int[31];
-        for(int i=1;i<=30;i++){
-            a[i]=i;
+        int[] a=new int[10];
+        for (int i=0;i<10;i++){
+            a[i]=sc.nextInt();
+            a[i] %=42;
         }
-        for(int i=0;i<28;i++){
-            s[i]=sc.nextInt();
-            a[s[i]]=0;
+        int cnt=0;
+        for(int i=0;i<10;i++){
+            int num=0;
+            for(int j=i+1;j<1;j++){
+                if(a[j]==a[i]) num++;
+                if(num==0) cnt++;
+            }
         }
-        for(int i=1;i<=30;i++){
-            if(a[i]!=0) System.out.println(i);
-        }
+        System.out.print(cnt);
     }
 }
