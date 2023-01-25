@@ -79,3 +79,67 @@
 //     return 0;
 
 // }
+
+// 백준 1546
+// #include <stdio.h>
+// int main(){
+//     int n=0;
+//     int score[1000]={0,};
+//     float max=0;
+//     scanf("%d",&n);
+//     for(int i=0;i<n;i++){
+//         scanf("%d",&score[i]);
+//         if(max<score[i]){
+//             max=score[i];
+//         }
+//     }
+//     double sum=0;
+//     for(int i=0;i<n;i++){
+//         sum+=score[i]/max*100;
+//     }
+//     printf("%lf",sum/n); 
+// }
+
+// 백준 8958
+// #include <stdio.h>
+// #include <string.h>
+// int main(){
+//     int n=0;
+//     scanf("%d",&n);
+//     char ox[80];
+    
+//     for(int i=0;i<n;i++){
+//         int cnt=0,score=0;
+//         gets(ox);
+//         for(int j=0;j<strlen(ox);j++){
+//             if(ox[i]=='O'){
+//                 cnt++;
+//                 score+=cnt;
+//             }
+//             else cnt=0;
+//         }
+//         printf("%d",score);
+//     }
+// }
+
+// 백준4344
+#include <stdio.h>
+#include <string.h>
+int main() {
+	int c = 0, t = 0;
+	scanf("%d", &t);
+	for (int i = 0; i < t; i++) {
+		int a[1000] = { 0, };
+		int sum = 0, cnt = 0;
+		scanf("%d", &c);
+		for (int j = 0; j < c; j++) {
+			scanf("%d", &a[j]);
+			sum += a[j];
+		}
+		for (int j = 0; j < c; j++) {
+			if (a[j] > (float)sum / c) cnt++;
+		}
+		printf("%.3f%%\n", (float)cnt / c * 100);
+	}
+	return 0;
+}
