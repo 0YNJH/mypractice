@@ -123,23 +123,87 @@
 // }
 
 // 백준4344
-#include <stdio.h>
-#include <string.h>
-int main() {
-	int c = 0, t = 0;
-	scanf("%d", &t);
-	for (int i = 0; i < t; i++) {
-		int a[1000] = { 0, };
-		int sum = 0, cnt = 0;
-		scanf("%d", &c);
-		for (int j = 0; j < c; j++) {
-			scanf("%d", &a[j]);
-			sum += a[j];
-		}
-		for (int j = 0; j < c; j++) {
-			if (a[j] > (float)sum / c) cnt++;
-		}
-		printf("%.3f%%\n", (float)cnt / c * 100);
-	}
-	return 0;
-}
+// #include <stdio.h>
+// #include <string.h>
+// int main() {
+// 	int c = 0, t = 0;
+// 	scanf("%d", &t);
+// 	for (int i = 0; i < t; i++) {
+// 		int a[1000] = { 0, };
+// 		int sum = 0, cnt = 0;
+// 		scanf("%d", &c);
+// 		for (int j = 0; j < c; j++) {
+// 			scanf("%d", &a[j]);
+// 			sum += a[j];
+// 		}
+// 		for (int j = 0; j < c; j++) {
+// 			if (a[j] > (float)sum / c) cnt++;
+// 		}
+// 		printf("%.3f%%\n", (float)cnt / c * 100);
+// 	}
+// 	return 0;
+// }
+
+//계산기
+
+// #include <stdio.h>
+// void printMenu() {
+// 	printf("========================================");
+// 	printf("MENU");
+// 	printf("========================================\n");
+// 	printf("1.덧셈\n2.뺄셈\n3.곱셈\n4.나눗셈\n5.나머지\n");
+// 	printf("원하는 메뉴를 선택하시오(1-5):");
+// }
+
+// int add(int x, int y) {
+// 	return x + y;
+// }
+// int sub(int x, int y) {
+// 	return x - y;
+// }
+// int mul(int x, int y) {
+// 	return x * y;
+// }
+// int div(int x, int y) {
+// 	return x / y;
+// }
+// int remain(int x, int y) {
+// 	return x % y;
+// }
+// void calculate() {
+// 	int num = 0;
+// 	int result = 0;
+// 	printMenu();
+// 	scanf("%d", &num);
+// 	int a = 0, b = 0;
+// 	printf("숫자 2개 입력하시오: ");
+// 	scanf("%d %d", &a, &b);
+// 	switch (num) {
+// 	case 1:
+// 		result = add(a, b);
+// 		break;
+// 	case 2:
+// 		result = sub(a, b);
+// 		break;
+// 	case 3:
+// 		result = mul(a, b);
+// 		break;
+// 	case 4:
+// 		result = div(a, b);
+// 		break;
+// 	case 5:
+// 		result = remain(a, b);
+// 		break;
+// 	}
+// 	printf("완산 결과: %d\n", result);
+// 	char ch;
+// 	printf("계속하려면 y를 누르시오: ");
+// 	ch = getchar();
+// 	ch = getchar();
+// 	if (ch == 'y') calculate();
+// 	else return 0;
+// }
+// int main() {
+// 	calculate();
+// 	return 0;
+// }
