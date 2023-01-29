@@ -207,3 +207,32 @@
 // 	calculate();
 // 	return 0;
 // }
+
+// 백준 10870
+// #include <stdio.h>
+// int fino(int n){
+//     if(n==0) return 0;
+//     else if(n==1||n==2) return 1;
+//     return fino(n-1)+fino(n-2);
+// }
+// int main(){
+//     int n=0;
+//     scanf("%d",&n);
+//     printf("%d",fino(n));
+//     return 0;
+// }
+
+
+//백준 10872
+// #include <stdio.h>
+
+// int fac(int n){
+//     if(n<1) return 1;
+//     return n*fac(n-1);
+// }
+
+// int main(){
+//     int n=0;
+//     scanf("%d",&n);
+//     printf("%d",fac(n));
+// }
