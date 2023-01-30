@@ -236,3 +236,25 @@
 //     scanf("%d",&n);
 //     printf("%d",fac(n));
 // }
+
+//백준 11729
+#include <stdio.h>
+void hanoi(int n, int start,int goal,int tmp) {
+	if (n == 1) printf("%d %d\n", start, goal);
+	else {
+		hanoi(n - 1, start, tmp, goal);
+		printf("%d %d\n", start, goal);
+		hanoi(n - 1, tmp, goal, start);
+	}
+}
+int power(int n, int m) {
+	if (m == 0) return 1;
+	return n * power(n, m - 1);
+}
+int main() {
+	int n;
+	scanf("%d", &n);
+	printf("%d\n", power(2, n) - 1);
+	hanoi(n, 1, 3, 2);
+	return 0;
+}
