@@ -238,23 +238,41 @@
 // }
 
 //백준 11729
-#include <stdio.h>
-void hanoi(int n, int start,int goal,int tmp) {
-	if (n == 1) printf("%d %d\n", start, goal);
-	else {
-		hanoi(n - 1, start, tmp, goal);
-		printf("%d %d\n", start, goal);
-		hanoi(n - 1, tmp, goal, start);
-	}
-}
-int power(int n, int m) {
-	if (m == 0) return 1;
-	return n * power(n, m - 1);
-}
-int main() {
-	int n;
-	scanf("%d", &n);
-	printf("%d\n", power(2, n) - 1);
-	hanoi(n, 1, 3, 2);
-	return 0;
-}
+// #include <stdio.h>
+// void hanoi(int n, int start,int goal,int tmp) {
+// 	if (n == 1) printf("%d %d\n", start, goal);
+// 	else {
+// 		hanoi(n - 1, start, tmp, goal);
+// 		printf("%d %d\n", start, goal);
+// 		hanoi(n - 1, tmp, goal, start);
+// 	}
+// }
+// int power(int n, int m) {
+// 	if (m == 0) return 1;
+// 	return n * power(n, m - 1);
+// }
+// int main() {
+// 	int n;
+// 	scanf("%d", &n);
+// 	printf("%d\n", power(2, n) - 1);
+// 	hanoi(n, 1, 3, 2);
+// 	return 0;
+// }
+
+//백준 15969
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main() {
+// 	int n = 0;
+// 	scanf("%d", &n);
+// 	int* arr = (int*)malloc(sizeof(int) * n);
+// 	for (int i = 0; i < n; i++) {
+// 		scanf("%d", &arr[i]);
+// 	}
+// 	int max = 0, min = arr[0];
+// 	for (int i = 0; i < n; i++) {
+// 		if (max < arr[i]) max = arr[i];
+// 		if (min > arr[i]) min = arr[i];
+// 	}
+// 	printf("%d", max - min);
+// }
