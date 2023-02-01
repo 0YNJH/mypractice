@@ -278,19 +278,57 @@
 // }
 
 // 백준 17608
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main(void) {
+// 	int n, max = 0, total = 0;
+// 	scanf("%d", &n);
+// 	int* stick = (int*)malloc(sizeof(int*) * n);
+// 	for (int i = 0; i < n; i++) scanf("%d", &stick[i]);
+// 	for (int i = n - 1; i >= 0; i--) {
+// 		if (max < stick[i]) {
+// 			max = stick[i];
+// 			total += 1;
+// 		}
+// 	}
+// 	printf("%d", total);
+// 	return 0;
+// }
+
+//백준 14696
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 int main(void) {
-	int n, max = 0, total = 0;
+	int n = 0;
 	scanf("%d", &n);
-	int* stick = (int*)malloc(sizeof(int*) * n);
-	for (int i = 0; i < n; i++) scanf("%d", &stick[i]);
-	for (int i = n - 1; i >= 0; i--) {
-		if (max < stick[i]) {
-			max = stick[i];
-			total += 1;
+	for (int i = 0; i < n; i++) {
+		int A[5] = { 0, };
+		int B[5] = { 0, };
+		int a_cnt = 0, b_cnt = 0;
+		char winner = 'D';
+		scanf("%d",&a_cnt);
+		int x = 0;
+		for (int j = 0; j < a_cnt; j++) {
+			scanf("%d", &x); // 4 -> index로 활용
+			A[x]++;
 		}
+		scanf("%d", &b_cnt);
+		for (int j = 0; j < b_cnt; j++) {
+			scanf("%d", &x); // 4 -> index로 활용
+			B[x]++;
+		}
+		for (int j = 4; j >= 0; j--) {
+			if (A[j] > B[j]) {
+				winner='A';
+				break;
+			}
+			else if (B[j] > A[j]) {
+				winner='B';
+				break;
+			}
+		}
+		printf("%c\n", winner);
 	}
-	printf("%d", total);
 	return 0;
 }
