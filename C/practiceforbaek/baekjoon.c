@@ -296,39 +296,69 @@
 // }
 
 //백준 14696
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// int main(void) {
+// 	int n = 0;
+// 	scanf("%d", &n);
+// 	for (int i = 0; i < n; i++) {
+// 		int A[5] = { 0, };
+// 		int B[5] = { 0, };
+// 		int a_cnt = 0, b_cnt = 0;
+// 		char winner = 'D';
+// 		scanf("%d",&a_cnt);
+// 		int x = 0;
+// 		for (int j = 0; j < a_cnt; j++) {
+// 			scanf("%d", &x); // 4 -> index로 활용
+// 			A[x]++;
+// 		}
+// 		scanf("%d", &b_cnt);
+// 		for (int j = 0; j < b_cnt; j++) {
+// 			scanf("%d", &x); // 4 -> index로 활용
+// 			B[x]++;
+// 		}
+// 		for (int j = 4; j >= 0; j--) {
+// 			if (A[j] > B[j]) {
+// 				winner='A';
+// 				break;
+// 			}
+// 			else if (B[j] > A[j]) {
+// 				winner='B';
+// 				break;
+// 			}
+// 		}
+// 		printf("%c\n", winner);
+// 	}
+// 	return 0;
+// }
+
+//구조체
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-int main(void) {
-	int n = 0;
-	scanf("%d", &n);
-	for (int i = 0; i < n; i++) {
-		int A[5] = { 0, };
-		int B[5] = { 0, };
-		int a_cnt = 0, b_cnt = 0;
-		char winner = 'D';
-		scanf("%d",&a_cnt);
-		int x = 0;
-		for (int j = 0; j < a_cnt; j++) {
-			scanf("%d", &x); // 4 -> index로 활용
-			A[x]++;
-		}
-		scanf("%d", &b_cnt);
-		for (int j = 0; j < b_cnt; j++) {
-			scanf("%d", &x); // 4 -> index로 활용
-			B[x]++;
-		}
-		for (int j = 4; j >= 0; j--) {
-			if (A[j] > B[j]) {
-				winner='A';
-				break;
-			}
-			else if (B[j] > A[j]) {
-				winner='B';
-				break;
+typedef struct {
+	char name[20];
+	int kor,eng,math;
+	int total;
+}Person;
+int main() {
+	Person p[3];
+	for (int i = 0; i < 3; i++) {
+		scanf("%s %d %d %d", &p[i].name, &p[i].kor, &p[i].eng, &p[i].math);
+		p[i].total = p[i].kor + p[i].eng + p[i].math;
+	}
+	for (int i = 0; i < 3; i++) {
+		for (int j = i+1; j < 3; j++) {
+			if (p[i].total < p[j].total) {
+				Person temp = p[i];
+				p[i] = p[j];
+				p[j] = p[i];
 			}
 		}
-		printf("%c\n", winner);
+	}
+	for (int i = 0; i < 3; i++) {
+		printf("%s %d %d %d\n", p[i].name, p[i].kor, p[i].eng, p[i].math);
 	}
 	return 0;
 }
