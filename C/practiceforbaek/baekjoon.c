@@ -334,31 +334,87 @@
 // }
 
 //구조체
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-typedef struct {
-	char name[20];
-	int kor,eng,math;
-	int total;
-}Person;
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// typedef struct {
+// 	char name[20];
+// 	int kor,eng,math;
+// 	int total;
+// }Person;
+// int main() {
+// 	Person p[3];
+// 	for (int i = 0; i < 3; i++) {
+// 		scanf("%s %d %d %d", &p[i].name, &p[i].kor, &p[i].eng, &p[i].math);
+// 		p[i].total = p[i].kor + p[i].eng + p[i].math;
+// 	}
+// 	for (int i = 0; i < 3; i++) {
+// 		for (int j = i+1; j < 3; j++) {
+// 			if (p[i].total < p[j].total) {
+// 				Person temp = p[i];
+// 				p[i] = p[j];
+// 				p[j] = p[i];
+// 			}
+// 		}
+// 	}
+// 	for (int i = 0; i < 3; i++) {
+// 		printf("%s %d %d %d\n", p[i].name, p[i].kor, p[i].eng, p[i].math);
+// 	}
+// 	return 0;
+// }
+
+typedef struct money_box {
+	int w500; //500백원 동전 수 저장
+	int w100; //ㅂ00백원 동전 수 저장
+	int w50; //50백원 동전 수 저장
+	int w10; //10백원 동전 수 저장
+}MoneyBox;
+
+void init(MoneyBox* s); //MoneyBox 변수 초기화
+void save(MoneyBox* s, int unit, int cnt); //unit 동전을 cnt개 저금
+void total(MoneyBox* s); //저금통의 총 저축액 반환
+
 int main() {
-	Person p[3];
-	for (int i = 0; i < 3; i++) {
-		scanf("%s %d %d %d", &p[i].name, &p[i].kor, &p[i].eng, &p[i].math);
-		p[i].total = p[i].kor + p[i].eng + p[i].math;
-	}
-	for (int i = 0; i < 3; i++) {
-		for (int j = i+1; j < 3; j++) {
-			if (p[i].total < p[j].total) {
-				Person temp = p[i];
-				p[i] = p[j];
-				p[j] = p[i];
-			}
+	int unit, cnt, res = 0;
+	MoneyBox mb;
+	init(&mb);
+	while (1) {
+		printf("동전의 금액과 개수: ");
+		scanf("%d", &unit);
+		if (unit <= 0) break;
+		else {
+			scanf("%d", &cnt);
+			save(&mb, unit, cnt);
 		}
 	}
-	for (int i = 0; i < 3; i++) {
-		printf("%s %d %d %d\n", p[i].name, p[i].kor, p[i].eng, p[i].math);
+	res = total(&mb);
+	printf("총 저금액 : %d원", res);
+}
+
+void init(MoneyBox* s) {
+	s-> w500 = 0;
+	s-> w100 = 0;
+	s-> w50 = 0;
+	s-> w10 = 0;
+}
+void save(MoneyBox* s, int unit, int cnt) {
+	switch (unit) {
+	case 500:
+		s->w500 += unit * cnt;
+		break;
+	case 100:
+		s->w100 += unit * cnt;
+		break;
+	case 50:
+		s->w50 += unit * cnt;
+		break;
+	case 10:
+		s->w10 += unit * cnt;
+		break;
+	default:
+		break;
 	}
-	return 0;
+}
+void total(MoneyBox* s) {
+	return s->w10 + s->w100 + s->w50 + s->w500;
 }
