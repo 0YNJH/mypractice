@@ -363,58 +363,203 @@
 // 	return 0;
 // }
 
-typedef struct money_box {
-	int w500; //500백원 동전 수 저장
-	int w100; //ㅂ00백원 동전 수 저장
-	int w50; //50백원 동전 수 저장
-	int w10; //10백원 동전 수 저장
-}MoneyBox;
+// typedef struct money_box {
+// 	int w500; //500백원 동전 수 저장
+// 	int w100; //ㅂ00백원 동전 수 저장
+// 	int w50; //50백원 동전 수 저장
+// 	int w10; //10백원 동전 수 저장
+// }MoneyBox;
 
-void init(MoneyBox* s); //MoneyBox 변수 초기화
-void save(MoneyBox* s, int unit, int cnt); //unit 동전을 cnt개 저금
-void total(MoneyBox* s); //저금통의 총 저축액 반환
+// void init(MoneyBox* s); //MoneyBox 변수 초기화
+// void save(MoneyBox* s, int unit, int cnt); //unit 동전을 cnt개 저금
+// void total(MoneyBox* s); //저금통의 총 저축액 반환
+
+// int main() {
+// 	int unit, cnt, res = 0;
+// 	MoneyBox mb;
+// 	init(&mb);
+// 	while (1) {
+// 		printf("동전의 금액과 개수: ");
+// 		scanf("%d", &unit);
+// 		if (unit <= 0) break;
+// 		else {
+// 			scanf("%d", &cnt);
+// 			save(&mb, unit, cnt);
+// 		}
+// 	}
+// 	res = total(&mb);
+// 	printf("총 저금액 : %d원", res);
+// }
+
+// void init(MoneyBox* s) {
+// 	s-> w500 = 0;
+// 	s-> w100 = 0;
+// 	s-> w50 = 0;
+// 	s-> w10 = 0;
+// }
+// void save(MoneyBox* s, int unit, int cnt) {
+// 	switch (unit) {
+// 	case 500:
+// 		s->w500 += unit * cnt;
+// 		break;
+// 	case 100:
+// 		s->w100 += unit * cnt;
+// 		break;
+// 	case 50:
+// 		s->w50 += unit * cnt;
+// 		break;
+// 	case 10:
+// 		s->w10 += unit * cnt;
+// 		break;
+// 	default:
+// 		break;
+// 	}
+// }
+// void total(MoneyBox* s) {
+// 	return s->w10 + s->w100 + s->w50 + s->w500;
+// }
+
+//좌석예약하기
+
+#include <stdio.h>
+#include <stdlib.h>
+#define Col 6
+#define Row 6
+#define TOTAL_NUM Col*Row // 전체 좌석수
+
+//좌석 현황
+void PrintCheck(int arr[][Col]);
+//좌석 예약
+void CheckSeat(int arr[][Col]);
+//좌석 변경
+void ChangeCheck(int arr[][Col]);
+//예약 취소
+void CancelCheck(int arr[][Col]);
+//메뉴 화면
+
+int check = 0;// 예약 좌석 수
+int SelectMenu() {
+	int key = 0;
+	printf("1.좌석 예약\n");
+	printf("2.좌석 취소\n");
+	printf("3.좌석 변경\n");
+	printf("4.좌석 현황\n");
+	printf("5.종료\n");
+	scanf("%d", &key);
+	return key;
+}
+
 
 int main() {
-	int unit, cnt, res = 0;
-	MoneyBox mb;
-	init(&mb);
-	while (1) {
-		printf("동전의 금액과 개수: ");
-		scanf("%d", &unit);
-		if (unit <= 0) break;
-		else {
-			scanf("%d", &cnt);
-			save(&mb, unit, cnt);
+
+	int seat[Row][Col] = { 0, };
+	int key = 0;
+	while ((key = SelectMenu()) != 5) {
+		switch (key) {
+		case 1:
+			PrintCheck(seat);
+			CheckSeat(seat);
+			break;
+		case 2:
+			PrintCheck(seat);
+			CancelCheck(seat);
+			break;
+		case 3:
+			PrintCheck(seat);
+			CancelCheck(seat);
+			break;
+		case 4:
+			PrintCheck(seat);
+			break;
+		default:
+			break;
 		}
 	}
-	res = total(&mb);
-	printf("총 저금액 : %d원", res);
+	printf("프로그램을 종료하겠습니다.");
+	return 0;
 }
 
-void init(MoneyBox* s) {
-	s-> w500 = 0;
-	s-> w100 = 0;
-	s-> w50 = 0;
-	s-> w10 = 0;
-}
-void save(MoneyBox* s, int unit, int cnt) {
-	switch (unit) {
-	case 500:
-		s->w500 += unit * cnt;
-		break;
-	case 100:
-		s->w100 += unit * cnt;
-		break;
-	case 50:
-		s->w50 += unit * cnt;
-		break;
-	case 10:
-		s->w10 += unit * cnt;
-		break;
-	default:
-		break;
+void PrintCheck(int arr[][Col]) {
+	printf("=======================무대=======================\n");
+	for (int i = 1; i <= Row; i++) {
+		printf("\t%d열", i);
 	}
+	printf("\n=======================무대=======================\n");
+	for (int i = 0; i < Col; i++) {
+		printf("%c행\t", i + 65);
+		for (int j = 0; j < Row; j++) {
+			if (arr[i][j] == 0) printf("□\t");
+			else printf("■\t");
+			
+		}
+		printf("\n");
+	}
+	printf("전체 좌석 수: %d\n", TOTAL_NUM);
+	printf("예약 좌석 수: %d\n", check);
+	printf("잔여 좌석 수: %d\n", TOTAL_NUM - check);
 }
-void total(MoneyBox* s) {
-	return s->w10 + s->w100 + s->w50 + s->w500;
+//좌석 예약
+void CheckSeat(int arr[][Col]) {
+	char nRow;
+	int nCol;
+	printf("예약할 좌석을 입력하세요 (ex. A1) : ");
+	//1.데이터 입력받기
+	scanf("%c", &nRow);
+	scanf("%c%d", &nRow, &nCol);
+	//2.좌석이 이미 있는 경우 -> 이미 예약된 좌석입니다. -> return
+	if (arr[nRow-65][nCol-1] == 1) {
+		printf("이미 예약된 좌석입니다.\n");
+		return;
+	}
+	//3.범위를 벗어난 경우 -> 잘못된 번호를 입력하셨습니다. -> return
+	if (nRow<'A' || nRow>Row + 'A' || nCol<1 || nCol>Col) {
+		printf("잘못된 번호를 입력하셨습니다.");
+		return;
+	}
+
+	arr[nRow-65][nCol-1] = 1;
+	check++;
+	printf("%c%d좌석 예약이 완료 되었습니다.\n", nRow, nCol);
+}
+
+void ChangeCheck(int arr[][Col]) {
+	char nRow;
+	int nCol;
+	printf("예약하신 좌석을 입력하세요(ex. A1): ");
+	scanf("%c", &nRow);
+	scanf("%c%d", &nRow, &nCol);
+	//1.입력받은 행과 열이 범위에 속하는지 check
+	if (nRow < 'A' || nRow>'A' + Row || nCol <1 || nCol>Col) {
+		printf("잘못된 번호를 입력하셨습니다.\n");
+		return;
+	}
+	//2.입력받은 행과 열이 예약이 되어있는지 check
+	if (arr[nRow - 65][nCol - 1] == 0) {
+		printf("예약이 되어있지 않는 좌석입니다.\n");
+		return;
+	}
+	//3.기존 예약 좌석은 초기화 -> 행과 열을 입력받아 새로운 자리로 변경 ->좌석예약함수
+	arr[nRow - 65][nCol - 1] = 0;
+	check--;
+	CheckSeat(arr);
+}
+
+//예약 취소
+void CancelCheck(int arr[][Col]) {
+	char nRow;
+	int nCol;
+	printf("예약을 취소할 좌석을 입력하세요.(ex. A1) : ");
+	scanf("%c", &nRow);
+	scanf("%c%d", &nRow, &nCol);
+	if (nRow < 'A' || nRow >'A' + Row || nCol<1 || nCol>Col) {
+		printf("잘못된 번호를 입력하셨습니다.\n");
+		return;
+	}
+	if (arr[nRow - 65][nCol - 1] == 0) {
+		printf("예약되지 않은 좌석입니다.\n");
+		return;
+	}
+	arr[nRow - 65][nCol - 1] = 0;
+	check--;
+	printf("%c%d좌석 예약이 취소 되었습니다.\n",nRow,nCol);
 }
