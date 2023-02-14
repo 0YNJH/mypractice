@@ -563,3 +563,333 @@ void CancelCheck(int arr[][Col]) {
 	check--;
 	printf("%c%d좌석 예약이 취소 되었습니다.\n",nRow,nCol);
 }
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//#define FALSE 0
+//#define TRUE 1
+//
+//typedef struct _node Node;
+//
+//struct _node {    /*노드 구조체(자기참조 구조체 사용*/
+//    int data;     /*데이터 영역 : int형 데이터 저장*/
+//    Node* next;   /*포인터 영역*/
+//};
+//
+//typedef struct {  /*연결 리스트 관리 구조체*/
+//    Node* head;   /*head pointer (head node 가리킴*/
+//    Node* tail;   /*tail pointer (tail node 가리킴)*/
+//    int size;     /*연결 리스트의 크기 - 실제 data node의 개수*/
+//}List;
+//
+//void createList(List* lp);            /*연결 리스트 초기화*/
+//
+//void addFirst(List* lp, int data);    /*head node 뒤에 node 추가*/
+//
+//void addLast(List* lp, int data);     /*tail node 앞에 node 추가*/
+//
+//void printList(List* lp);             /*리스트 내의 모든 데이터 출력*/
+//
+//Node* searchNode(List* lp, int data); /*data와 일치하는 node 검색*/
+//
+//void removeNode(List* lp, int data);  /*data 노드 삭제*/
+//
+//void destoryList(List* lp);           /*리스트 내의 모든 노드 삭제*/
+//
+//
+//int selectMenu()
+//{
+//    printf("==========================\n");
+//    printf("1.머리에 노드를 삽입\n");
+//    printf("2.꼬리에 노드를 삽입\n");
+//    printf("3.검색하기\n");
+//    printf("4.삭제하기\n");
+//    printf("5.출력하기\n");
+//    printf("0.종료\n");
+//
+//    int menu;
+//    printf("메뉴 선택 : ");
+//    scanf("%d", &menu);
+//    return menu;
+//}
+//
+//
+//int main()
+//{
+//    List list;
+//    int menu, data;
+//    createList(&list);
+//    while ((menu = selectMenu()) != 0)
+//    {
+//        switch (menu)
+//        {
+//        case 1:
+//            printf("머리에 데이터 삽입 : ");
+//            scanf("%d", &data);
+//            addFirst(&list, data);
+//            break;
+//        case 2:
+//            printf("꼬리에 데이터 삽입 : ");
+//            scanf("%d", &data);
+//            addLast(&list, data);
+//            break;
+//        case 3:
+//            printf("데이터 검색 : ");
+//            scanf("%d", &data);
+//            if (searchNode(&list, data))
+//                printf("검색 데이터가 존재합니다.\n");
+//            else
+//                printf("검색 데이터가 존재하지 않습니다.\n");
+//            break;
+//        case 4:
+//            printf("데이터 삭제 : ");
+//            scanf("%d", &data);
+//            removeNode(&list, data);
+//            break;
+//        case 5:
+//            printf("데이터 출력 : ");
+//            printList(&list);
+//            break;
+//        }
+//    }
+//    printf("프로그램 종료\n");
+//    destoryList(&list);
+//    return 0;
+//}
+//
+///*연결 리스트 초기화*/
+//void createList(List* lp) {
+//
+//    lp->head = (Node*)malloc(sizeof(Node));  /*head node 생성*/
+//    lp->tail = (Node*)malloc(sizeof(Node));  /*tail node 생성*/
+//    lp->head->next = lp->tail; /*head node와 tail node 연결*/
+//    lp->tail->next = lp->tail; /*tail node의 next는 자기 자신을 가리키도록 설정*/
+//    lp->size = 0; /*연결 리스트 크기(size 멤버) 0으로 초기화*/
+//}
+//
+///*head node 뒤에 node 추가*/
+//void addFirst(List* lp, int data) {
+//    if (lp == NULL)
+//        return;
+//    Node* newp = (Node*)malloc(sizeof(Node));  /*새 노드 생성*/
+//    newp->data = data;           /*새 노드에 data 저장*/
+//    newp->next = lp->head->next; /*새 노드의 next 설정*/
+//    lp->head->next = newp;       /*head node 뒤에 새 노드 연결*/
+//    lp->size++;                  /*리스트 size 증가*/
+//}
+//
+///*tail node 앞에 node 추가*/
+//void addLast(List* lp, int data) {
+//    if (lp == NULL)
+//        return;
+//    Node* newp = (Node*)malloc(sizeof(Node)); /*새 노드 생성*/
+//    newp->data = data;           /*새 노드에 data 저장*/
+//    newp->next = lp->tail;       /*새 노드의 next 설정*/
+//
+//    /*tail node의 앞 노드 검색*/
+//    Node* btp = lp->head;
+//    while (btp->next != lp->tail) {
+//        btp = btp->next;
+//    }
+//    btp->next = newp;            /*tail node 앞에 새 노드 연결*/
+//    lp->size++;                  /*리스트 size 증가*/
+//}
+//
+///*리스트 내의 모든 데이터 출력*/
+//void printList(List* lp) {
+//    if (lp == NULL)
+//        return;
+//    /*data가 있는 첫 노드를 current로 가리키게 함*/
+//    Node* current = lp->head->next;
+//    /*리스트의 마지막 노드까지 current를 옮기면서 data 출력하기*/
+//    while (current != lp->tail) {
+//        printf("%d ", current->data);
+//        current = current->next;
+//    }
+//    printf("\n");
+//}
+//
+////data와 일치하는 node 검색
+//Node* searchNode(List* lp, int data) {
+//	if (lp == NULL) return NULL;
+//	//data 있는 첫 노드를 current 가리키게 함
+//	Node* current = lp->head->next;
+//	while (current != lp->tail) {
+//		if (current->data == data) {
+//			return current;
+//			current = current->next;
+//		}
+//	}
+//	return NULL;
+//}
+//
+////data 노드 삭제
+//void removeNode(List* lp, int data) {
+//	if (lp==NULL) return;
+//
+//	//삭제할 node를 검색함, - searchNode
+//	Node* deleteP = searchNode(lp, data);
+//	if (deleteP != NULL) {
+//		//삭제할 노드의 바로 앞 노드를 찾음
+//		Node* current = lp->head;
+//		while (current->next != deleteP) current = current->next;
+//
+//		//삭제할 노드의 앞 노드와 삭제할 노드의 뒤 노드를 연결
+//		current->next = deleteP->next;
+//		free(deleteP);
+//		lp->size--;
+//		printf("데이터 삭제 성공\n");
+//	}
+//	else
+//		printf("데이터를 찾지 못했습니다.\n");
+//}
+//
+////리스트 내의 모든 노드 삭제
+//void destoryList(List* lp) {
+//    if (lp == NULL) return;
+//
+//    //data 있는 첫 노드를 current로 가리키게 한다
+//    Node* current = lp->head->next;
+//    Node* tempP;
+//
+//    //리스트의 마지막 데이터 노드 까지 current를 옮기면서 삭제하기
+//    while (current != lp->tail) {
+//        tempP = current->next;
+//        free(current);
+//        current = tempP;
+//    }
+//    free(lp->head);
+//    free(lp->tail);
+//    lp->head = lp->tail = NULL;
+//    lp->size = 0;
+//    printf("모든 노드를 삭제하였습니다.\n");
+//}
+
+//-----------------------------------------------
+
+
+//typedef struct stack {
+//	int* stack; //stack으로 사용되는 동적할당 배열을 가리키는 포인터 변수
+//	int size; //스택의 크기(size)
+//	int top; //스택의 입출구 위치 정보 저장
+//}Stack;
+//
+//void createStack(Stack* sp, int n); //스택 메모리 할당 및 멤버 초기화
+//int isStackFull(Stack* sp); //스택이 꽉 차있는지 검사
+//int isStackEmpty(Stack* sp); // 스택이 완전히 비어있는지 검사
+//int push(Stack* sp, int data); // 스택에 데이터 저장하는 함수
+//int pop(Stack* sp);// 스택에서 데이터를 꺼내는 함수
+//void printStack(Stack* sp); // 스택 내의 모든 데이터 출력함수
+//void destroyStack(Stack* sp);//스택 메모리 해제 함수
+//
+//int main() {
+//	Stack stk;
+//	createStack(&stk, 5);
+//	int menu,data;
+//	while (1) {
+//		printf("(1)푸시 (2)팝 (3)출력 (0)종료");
+//		scanf("%d", &menu);
+//		if (menu == 0) break;
+//		switch (menu) {
+//		case 1:
+//			printf("추가할 숫자 입력: ");
+//			scanf("%d", &data);
+//			if (push(&stk, data)) printf("PUSH 성공!\n");
+//			else printf("PUSH 실패\n");
+//			break;
+//		case 2:
+//			data=pop(&stk);
+//			if (data == 0) printf("데이터가 없습니다\n");
+//			else printf("pop: %d\n", data);
+//			break;
+//		case 3:
+//			printStack(&stk);
+//			break;
+//		}
+//	}
+//	printf("프로그램을 종료합니다.");
+//	destroyStack(&stk);
+//	return 0;
+//}
+//
+//void createStack(Stack* sp, int n) { //스택 메모리 할당 및 멤버 초기화
+//	//stack 메모리 할당
+//	sp->stack = (int*)calloc(n, sizeof(int));
+//	sp->size = n;
+//	sp->top = 0;
+//}
+//
+//int isStackFull(Stack* sp){ //스택이 꽉 차있는지 검사
+//	if (sp->top == sp->size) return 1;
+//	return 0;
+//}
+//int isStackEmpty(Stack* sp) { // 스택이 완전히 비어있는지 검사
+//	if (sp->top == 0) return 1;
+//	return 0;
+//}
+//
+//int push(Stack* sp, int data) { // 스택에 데이터 저장하는 함수
+//	//1.NULL 체크
+//	if (sp == NULL) return 0;
+//	//2.꽉 차 있으면 저장 실패
+//	if (isStackFull(sp)) return 0;
+//	//3.top위치에 데이터 저장 후 top증가
+//	else {
+//		sp->stack[sp->top] = data;
+//		sp->top++;
+//		return 1;
+//	}
+//}
+//
+//int pop(Stack* sp) {// 스택에서 데이터를 꺼내는 함수
+//	if (sp == NULL) return 0; //1.NULL check
+//	if (isStackEmpty(sp)) return 0; //2.비어있는지 check
+//	sp->top--; //3.top 감소
+//	return sp->stack[sp->top];
+//}
+//
+//void printStack(Stack* sp) { // 스택 내의 모든 데이터 출력함수
+//	if (sp == NULL) return;
+//	for (int i = sp->top--; i >= 0; i--) {
+//		printf("%d ", sp->stack[i]);
+//		printf("\n");
+//	}
+//}
+//void destroyStack(Stack* sp){//스택 메모리 해제 함수
+//	if (sp == NULL) return;
+//	free(sp->stack);
+//	sp->stack = NULL;
+//	sp->top = 0;
+//	sp->size = 0;
+//}
+
+//백준 9012
+
+int main() {
+	int n; scanf("%d", &n); //테스트 케이스 수
+	char str[50];
+	int stack[50]; //'(' => 1 push
+	for (int i = 0; i < n; i++) {
+		scanf("%s", str);
+		memset(stack, 0, sizeof(stack));
+		int top = 0;
+		int chk = 0;
+		for (int j = 0; str[j] != NULL; j++) {
+			if (str[j] == '(') stack[top++] = 1;
+			else {
+				if (top == 0) {
+					chk == 1;
+					break;
+				}
+				else {
+					stack[--top] = 0;
+				}
+			}
+		}
+
+		if (chk == 1 || top != 0) printf("NO\n");
+		else printf("YES\n");
+	}
+	
+}
