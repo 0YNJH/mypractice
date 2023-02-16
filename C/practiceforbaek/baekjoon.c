@@ -893,3 +893,27 @@ int main() {
 	}
 	
 }
+
+//백준 2164
+int main() {
+	int n; scanf("%d", &n); //4
+	int front = 0, rear = 0;
+	int* queue = (int*)calloc(n, sizeof(int));//queue 만들기
+	for (int i = 0; i < n; i++) {
+		queue[rear] = i + 1;
+		rear = (rear + 1) % n;
+	}//1 2 3 4
+	int size = n;
+	while (size > 1) {//카드가 한장 남을 때까지 반복한다
+		//dequeue
+		front = (front + 1) % n;
+		size--;
+		//맨윗장 버리고 맨 아래에 다시 추가
+		int x = queue[front];
+		front = (front + 1) % n;//버림
+		queue[rear] = x; //추가
+		rear = (rear + 1) % n;
+	}
+	printf("%d", queue[front]);
+	return 0;
+}
